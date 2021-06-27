@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import illustrationImg from '../../assets/illustration.svg';
 import {Link} from 'react-router-dom';
 import logoImg from '../../assets/logo.svg';
@@ -10,7 +9,7 @@ import { useAuth } from '../../Hooks/useAuth';
 
 
 export function NewRoom(){
-   const {user, signInWithGoogle} = useAuth();
+//    const {user, signInWithGoogle} = useAuth();
 
     return(
         <div  id="page-auth" >
