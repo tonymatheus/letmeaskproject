@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {useHistory} from 'react-router-dom';
 import illustrationImg from '../../assets/illustration.svg';
 import logoImg from '../../assets/logo.svg';
@@ -6,7 +6,7 @@ import googleIconImg from '../../assets/google-icon.svg';
 import login from '../../assets/login.svg';
 import '../../styles/auth.scss';
 import { Button } from '../../components/Button/Button';
-import {auth, firebase} from  '../../services/firebase';
+import { useAuth } from '../../Hooks/useAuth';
 
 
 
@@ -15,18 +15,13 @@ import {auth, firebase} from  '../../services/firebase';
 
 export function Home(){
     const history = useHistory();
-    
-    const handleCreateRoom = ()=>{
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider).then(result =>{console.log(result)})
-    
-        //  const provider = new firebase.auth.GoogleAuthProvider();
-
-    //  auth.signInWithPopup(provider).then(response=>{
-    //      console.log(response);
-    //  })    
-    // history.push("/rooms/new");
+    const {user, signInWithGoogle} = useAuth();
+     
+    const handleCreateRoom = async ()=>{ 
+        if(!user){
+            await signInWithGoogle();
+        }
+        history.push("/rooms/new");
     }
     return(
         <div  id="page-auth" >
@@ -35,6 +30,7 @@ export function Home(){
                 <strong>Criar sala de Q&amp; Ao vivo</strong>
                 <p>Tire as dúvidas da sua audiência em tempo real</p>
             </aside>
+           
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="Let me ask" />
