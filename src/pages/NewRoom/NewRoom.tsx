@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import illustrationImg from '../../assets/illustration.svg';
 import {Link} from 'react-router-dom';
 import logoImg from '../../assets/logo.svg';
@@ -6,10 +6,11 @@ import logoImg from '../../assets/logo.svg';
 import login from '../../assets/login.svg';
 import '../../styles/auth.scss';
 import { Button } from '../../components/Button/Button';
+import { useAuth } from '../../Hooks/useAuth';
+
 
 export function NewRoom(){
-   
-
+   const {user, signInWithGoogle} = useAuth();
 
     return(
         <div  id="page-auth" >
@@ -21,7 +22,7 @@ export function NewRoom(){
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="Let me ask" />
-                   
+                  
                   <h2>Criar uma nova sala</h2>
                    <form>
                        <input type="text"
